@@ -63,14 +63,14 @@ class HipChat extends Adapter
       if author
         author.name = from unless author.name
         author.reply_to = channel
-      hubot_msg = message.replace(mention, "#{self.name}: ")
-      self.receive new Robot.TextMessage(author, hubot_msg)
+        hubot_msg = message.replace(mention, "#{self.name}: ")
+        self.receive new Robot.TextMessage(author, hubot_msg)
 
     bot.onPrivateMessage (from, message) =>
       author = self.userForId(from.match(/_(\d+)@/)[1])
       if author
         author.reply_to = from
-      self.receive new Robot.TextMessage(author, "#{self.name}: #{message}")
+        self.receive new Robot.TextMessage(author, "#{self.name}: #{message}")
 
     bot.connect()
 
