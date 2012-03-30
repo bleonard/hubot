@@ -60,11 +60,12 @@ class HipChat extends Robot
 
     bot.onMessage (channel, from, message) ->
       author = self.userForName from
-      author.name = from unless author.name
-      author.reply_to = channel
-      hubot_msg = message.replace(mention, "#{self.name}: ")
-      console.log "Author: ", author
-      self.receive new Robot.TextMessage(author, hubot_msg)
+      if author
+        author.name = from unless author.name
+        author.reply_to = channel
+        hubot_msg = message.replace(mention, "#{self.name}: ")
+        console.log "Author: ", author
+        self.receive new Robot.TextMessage(author, hubot_msg)
 
     bot.onPrivateMessage (from, message) =>
       author = self.userForId(from.match(/_(\d+)@/)[1])
